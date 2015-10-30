@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Simple web-server that says "Hello World" for every path
 
-helloweb [--logfile <logfile>] <bind-ip> <bind-port> ...
+helloweb.py [--logfile <logfile>] <bind-ip> <bind-port> ...
 """
 
 import sys
@@ -19,7 +19,7 @@ class WebHello(BaseHTTPRequestHandler):
         self.end_headers()
 
         print >>self.wfile, \
-            "Hello %s at `%s`  ; %s" % (
+            "Hello %s at `%s`  ; %s  (python)" % (
                 ' '.join(self.server.webhello_argv) or 'world',
                 self.path, time.asctime())
 
@@ -41,7 +41,7 @@ def main():
         f = open(args.logfile, 'a', buffering=1)
         sys.stderr = f
 
-    print >>sys.stderr, '* %s helloweb starting at %s' % (
+    print >>sys.stderr, '* %s helloweb.py starting at %s' % (
         time.asctime(), (args.bind_ip, args.bind_port))
 
     # TODO autodetect ipv6/ipv4
