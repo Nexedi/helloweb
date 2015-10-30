@@ -11,5 +11,6 @@ The following languages are demonstrated:
 
 - Python
 - Ruby
+- Go
 
 .. _helloworld: https://lab.nexedi.com/nexedi/slapos/tree/master/software/helloworld
