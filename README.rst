@@ -10,5 +10,6 @@ The programs are used in SlapOS helloworld_ software release.
 The following languages are demonstrated:
 
 - Python
+- Ruby
 
 .. _helloworld: https://lab.nexedi.com/nexedi/slapos/tree/master/software/helloworld
