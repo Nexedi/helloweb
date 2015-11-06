@@ -36,7 +36,7 @@ func webhello(w http.ResponseWriter, r *http.Request) {
 func main() {
 	logfile := flag.String("logfile", "", "log output to file instead of stderr")
 	flag.Usage = func() {
-		fmt.Println("Usage: helloweb.go [options] bind_ip bind_port ...")
+		fmt.Println("Usage: helloweb.go [options] bindIP bindPort ...")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
@@ -46,9 +46,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	bind_ip := flag.Arg(0)
-	bind_port := flag.Arg(1)
-	bind_addr := net.JoinHostPort(bind_ip, bind_port)
+	bindIP := flag.Arg(0)
+	bindPort := flag.Arg(1)
+	bindAddr := net.JoinHostPort(bindIP, bindPort)
 
 	name = strings.Join(flag.Args()[2:], " ")
 	if name == "" {
@@ -65,9 +65,9 @@ func main() {
 		log.SetOutput(f)
 	}
 
-	log.Printf("* %s helloweb.go starting at %s", asctime(), bind_addr)
+	log.Printf("* %s helloweb.go starting at %s", asctime(), bindAddr)
 
 	http.HandleFunc("/", webhello)
 	log.Fatal(
-		http.ListenAndServe(bind_addr, logit(http.DefaultServeMux)))
+		http.ListenAndServe(bindAddr, logit(http.DefaultServeMux)))
 }
