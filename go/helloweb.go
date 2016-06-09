@@ -29,7 +29,7 @@ func logit(handler http.Handler) http.Handler {
 var name string
 
 func webhello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello %s at `%s`  ; %s  (go)", name,
+	fmt.Fprintf(w, "Hello %s at `%s`  ; %s  (go)\n", name,
 		r.URL.Path, asctime())
 }
 

@@ -41,7 +41,7 @@ def main
     httpd.mount_proc '/' do |req, resp|
         name = args.argv_extra.join(' ')
         name = 'world' if name.empty?
-        resp.body = "Hello #{name} at `#{req.path}`  ; #{Time.now.asctime}  (ruby)"
+        resp.body = "Hello #{name} at `#{req.path}`  ; #{Time.now.asctime}  (ruby)\n"
     end
 
     httpd.start
