@@ -9,6 +9,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"runtime"
 	"os"
 	"strings"
 	"time"
@@ -29,8 +30,8 @@ func logit(handler http.Handler) http.Handler {
 var name string
 
 func webhello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello %s at `%s`  ; %s  (go)\n", name,
-		r.URL.Path, asctime())
+	fmt.Fprintf(w, "Hello %s at `%s`  ; %s  (go %s)\n", name,
+		r.URL.Path, asctime(), runtime.Version())
 }
 
 func main() {

@@ -19,9 +19,9 @@ class WebHello(BaseHTTPRequestHandler):
         self.end_headers()
 
         print >>self.wfile, \
-            "Hello %s at `%s`  ; %s  (python)" % (
+            "Hello %s at `%s`  ; %s  (python %s)" % (
                 ' '.join(self.server.webhello_argv) or 'world',
-                self.path, time.asctime())
+                self.path, time.asctime(), sys.version.replace('\n', ' '))
 
 
 class HTTPServerV6(HTTPServer):
