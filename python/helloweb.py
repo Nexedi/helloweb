@@ -4,10 +4,17 @@
 helloweb.py [--logfile <logfile>] <bind-ip> <bind-port> ...
 """
 
+from __future__ import print_function
+
 import sys
+PY3 = sys.version_info.major >= 3
 import time
 import argparse
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+if PY3:
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+else:
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+
 from socket import AF_INET6
 
 
@@ -18,10 +25,12 @@ class WebHello(BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/plain")
         self.end_headers()
 
-        print >>self.wfile, \
-            "Hello %s at `%s`  ; %s  (python %s)" % (
+        msg = "Hello %s at `%s`  ; %s  (python %s)" % (
                 ' '.join(self.server.webhello_argv) or 'world',
                 self.path, time.asctime(), sys.version.replace('\n', ' '))
+        if PY3:
+            msg = msg.encode()
+        self.wfile.write(msg)
 
 
 class HTTPServerV6(HTTPServer):
@@ -41,8 +50,8 @@ def main():
         f = open(args.logfile, 'a', buffering=1)
         sys.stderr = f
 
-    print >>sys.stderr, '* %s helloweb.py starting at %s' % (
-        time.asctime(), (args.bind_ip, args.bind_port))
+    print('* %s helloweb.py starting at %s' % (
+        time.asctime(), (args.bind_ip, args.bind_port)), file=sys.stderr)
 
     # TODO autodetect ipv6/ipv4
     httpd = HTTPServerV6( (args.bind_ip, args.bind_port), WebHello)
