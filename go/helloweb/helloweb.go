@@ -31,8 +31,12 @@ import (
 	"net/http"
 	"runtime"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
+
+	// just to demonstrate/test Go module usage
+	"lab.nexedi.com/kirr/go123/my"
 )
 
 func asctime() string {
@@ -50,8 +54,8 @@ func logit(handler http.Handler) http.Handler {
 var name string
 
 func webhello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello %s at `%s`  ; %s  (go %s)\n", name,
-		r.URL.Path, asctime(), runtime.Version())
+	fmt.Fprintf(w, "Hello %s at `%s`  ; %s  (go %s; %s)\n", name,
+		r.URL.Path, asctime(), runtime.Version(), filepath.Base(my.File()))
 }
 
 func main() {
