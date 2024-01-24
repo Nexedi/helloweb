@@ -3,6 +3,7 @@ Gem::Specification.new do |gem|
     gem.name            = "helloweb"
     gem.version         = "0.1"
     gem.summary         = "Hello Web in Ruby"
+    gem.authors         = ["Kirill Smelkov"]
 
     gem.bindir          = ''
     gem.executables     = 'helloweb.rb'
